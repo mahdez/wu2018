@@ -18,7 +18,21 @@ class AI
      */
     public static function getGender($text)
     {
-        return 'Male';
+        $male = ["ผม","ข๊าพเจ้า","ครับ","นาย"];
+        $female = ["ค่ะ","หนู","นาง","ทอม"];
+
+        for($i = 0 ; $i <sizeof($male); $i++){
+            if (stripos($text,$male[$i]) !== false){
+                return 'Male';
+            }
+        }
+
+        for($i = 0 ; $i <sizeof($female); $i++){
+            if (stripos($text,$female[$i]) !== false){
+                return 'Female';
+            }
+        }
+        return 'Unknown';
     }
 
     /**
@@ -26,7 +40,26 @@ class AI
      */
     public static function getSentiment($text)
     {
-        return 'Neutral';
+        $happy = ["ดี","เก่ง","มีความสุข"];
+        $normal = ["คุณ","ท่าน","กิน"];
+        $unhappy = ["เหม็น","แย่","ไม่"];
+
+        for($i = 0 ; $i <sizeof($happy); $i++){
+            if (stripos($text,$happy[$i]) !== false){
+                return 'Positive';
+            }
+        }
+
+        for($i = 0 ; $i <sizeof($normal); $i++){
+            if (stripos($text,$normal[$i]) !== false){
+                return 'Neutral';
+            }
+        }
+        for($i = 0 ; $i <sizeof($unhappy); $i++){
+            if (stripos($text,$unhappy[$i]) !== false){
+                return 'Negative';
+            }
+        }
     }
 
     /**
@@ -34,7 +67,14 @@ class AI
      */
     public static function getRudeWords($text)
     {
-        return ['แสส'];
+        $not = ['เลว','อีบ้า','ควย','kuy','หำ','ใจร้าย'];
+        $arry = [];
+        for($i = 0 ; $i <sizeof($not); $i++){
+            if (stripos($text,$not[$i]) !== false){
+                array_push($arry,$not[$i]);
+            }
+        }
+        return $arry;
     }
 
     /**
@@ -42,6 +82,13 @@ class AI
      */
     public static function getLanguages($text)
     {
-        return ['TH', 'EN'];
+        $language = [];
+        if(preg_replace('/[^ก-๙]/ u','',$text)!=""){
+            array_push($language,"TH");
+        } 
+        if(preg_replace('/[^a-z]/ u','',$text)!=""){
+            array_push($language,"EN");
+        }
+        return $language;
     }
 }
