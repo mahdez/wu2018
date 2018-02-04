@@ -20,8 +20,30 @@ final class AITest extends TestCase
 
     public function testPositive(): void
     {
-        $result = AI::getGender('ดี');
+        $result = AI::getSentiment('ดี');
         $expected_result = 'Positive';
         $this->assertEquals($expected_result, $result);
     }
+
+    public function testNeutral(): void
+    {
+        $result = AI::getSentiment('คุณ');
+        $expected_result = 'Neutral';
+        $this->assertEquals($expected_result, $result);
+    }
+    
+    public function testNegative(): void
+    {
+        $result = AI::getSentiment('ไม่');
+        $expected_result = 'Negative';
+        $this->assertEquals($expected_result, $result);
+    }
+
+    // public function testRude(): void
+    // {
+    //     $result = AI::getRudeWords('เลว');
+    //     $expected_result = '';
+    //     $this->assertEquals($expected_result, $result);
+    // }
+    
 }
